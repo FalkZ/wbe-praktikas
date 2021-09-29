@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/console.js"></script>
+    <script type="module">
+        if (!mobileConsole.status.initialized) {
+          mobileConsole.init();
+        }
+  
+      //   document.getElementById("openDebug").onclick = () =>
+      //     mobileConsole.toggle();
+  
+        function update(source) {
+          const blob = new Blob([source], { type: "text/javascript" });
+          const url = URL.createObjectURL(blob);
+          import(url).then(({ default: App }) => {});
+        }
+        window.addEventListener(
+          "message",
+          (event) => {
+            update(event.data);
+          },
+          false
+        );
+      </script>
+    </body>
+
+    <style>
+        button[title="Close (destroy) console"]{
+            display: none!important;
+        }
+      /* #openDebug {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- <button id="openDebug">🐞</button> -->
+
+  
+</html>

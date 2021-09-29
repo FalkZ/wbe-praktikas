@@ -1,0 +1,92 @@
+# 3.
+
+```js
+const isPrime = (num) => {
+  let tempNum = num;
+
+  // can't be 1, 0 or negative
+  if (num < 2) return false;
+
+  // can't be float
+  if (!Number.isInteger(num)) return false;
+
+  do {
+    tempNum -= 1;
+
+    // can be devided by another number
+    if (num % tempNum === 0) return false;
+  } while (tempNum > 2);
+
+  return true;
+};
+
+const notPrimes = [-10, 0.3, 1, -0.2, 4, 10, 0];
+
+notPrimes.map((value) => console.log(value + ":" + isPrime(value)));
+
+const primes = [3, 7, 13];
+
+primes.map((value) => console.log(value + ":" + isPrime(value)));
+```
+
+Es spielt keine Rolle ob man Booleans oder 0/1 zurückgibt, da diese falsy/truthy sind. Man sollte es aber vermeiden weil man damit verwirrung stiften kann. Bzw. best practise ist Booleans zu verwenden.
+
+# 4.
+
+```js
+const fibo = (n) => {
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+  return fibo(n - 1) + fibo(n - 2);
+};
+
+const fiboItterative = (n) => {
+  if (n === 0) return 0n;
+  if (n === 1) return 1n;
+  let last = 0n;
+  let ret = 1n;
+  for (let index = 0; index < n - 1; index++) {
+    const temp = last + ret;
+    last = ret;
+    ret = temp;
+  }
+  return ret;
+};
+
+const sqrt5 = Math.sqrt(5);
+const g = (1 + sqrt5) / 2;
+
+const fiboFormula = (n) => {
+  return Math.round(g ** n / sqrt5);
+};
+
+const h = (1 - sqrt5) / 2;
+
+const fiboFormulaExact = (n) => {
+  return (g ** n - h ** n) / sqrt5;
+};
+
+const ns = new Array(20).fill(null).map((_, i) => i);
+
+const logTime = (name, fn) => {
+  console.time(name);
+  const rec = ns.map(fn);
+  console.timeEnd(name);
+  console.log(rec);
+};
+
+logTime("recursive", fibo);
+logTime("itterative", fiboItterative);
+logTime("formula", fiboFormula);
+logTime("formulaExact", fiboFormulaExact);
+```
+
+G ist Goldener Schnitt
+
+## d)
+
+Itterativ da kein Stackoverflow, und nicht Formel da sie mit Float arbeitet nicht Integern
+
+# 5.
+
+Weil |H| kleiner als 1 ist wird H^n immer kleiner und kann vernachlässigt werden
