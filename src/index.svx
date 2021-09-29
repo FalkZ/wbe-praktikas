@@ -1,1 +1,11 @@
-# Welcome to the lab page of Moriz and Falk
+# Praktikas für WBE von Moritz and Falk
+
+Der Code kann ausgeführt werden indem man darauf klickt:
+
+```js
+console.log("hello world");
+```
+
+🠐 Hier ist die Navigation zu den Praktikas
+
+[source code](https://github.com/FalkZ/wbe-praktikas)
