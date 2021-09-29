@@ -1127,7 +1127,7 @@ var mobileConsole = (function () {
       i = lines.length;
       while (i--) {
         thisLine = lines[i].trim();
-        lineAndColumn = thisLine.match(/(?::)(\d+)(?::)(\d+)/);
+        lineAndColumn = thisLine.match(/(?::)(\d+)(?::)(\d+)/) || [""];
         url =
           urlFromString(thisLine).replace(lineAndColumn[0], "").split("#")[0] ||
           "";
@@ -1897,13 +1897,13 @@ var mobileConsole = (function () {
       }
     }
     //log a 'welcome' message
-    console.info(
-      "--==## Mobile Console v" +
-        options.version +
-        " " +
-        (status.initialized ? "active" : "inactive") +
-        " ##==--"
-    );
+    // console.info(
+    //   "--==## Mobile Console v" +
+    //     options.version +
+    //     " " +
+    //     (status.initialized ? "active" : "inactive") +
+    //     " ##==--"
+    // );
   }
 
   //autorun if mobile
