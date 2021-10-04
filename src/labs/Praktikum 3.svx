@@ -1,0 +1,40 @@
+# 2.
+
+## a
+
+```js
+const equal = (a, b) => {
+  if (Object.keys(a).length !== Object.keys(b).length) return false;
+
+  for (const key in a) {
+    if (a[key] !== b[key]) return false;
+  }
+  return true;
+};
+
+console.log(equal({ a: 123 }, { a: 321 }));
+
+console.log(equal({ a: 123, b: "2" }, { b: "2", a: 123 }));
+
+console.log(equal({ a: 123, b: "2" }, { b: "2", a: 123, c: 1 }));
+
+console.log(equal([1, 2, 3], [1, 2, 3]));
+```
+
+## b
+
+Ja, weil typeof Object
+
+# 3
+
+```js
+const findTag = (str) => /<([^>]+)>/.exec(str)?.[1];
+
+console.log(findTag("<header>Text</header"));
+
+console.log(findTag("blabla <br> blabla"));
+
+console.log(findTag("blablablabla"));
+
+console.log(findTag("blabla <> blabla"));
+```

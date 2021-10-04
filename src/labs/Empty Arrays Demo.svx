@@ -1,0 +1,29 @@
+```js
+const arr = new Array(10);
+
+arr[9] = "10";
+
+for (const value of arr) {
+  console.log(value);
+}
+```
+
+```js
+console.clear();
+const arr = new Array(10);
+
+arr[9] = "10";
+console.log(arr);
+
+arr.map((val) => console.log(val));
+```
+
+```js
+console.clear();
+const arr = new Array(10).fill(undefined);
+
+arr[9] = "10";
+console.log(arr);
+
+arr.map((val) => console.log(val));
+```

@@ -98,6 +98,8 @@
     border-radius: 20px;
     padding: 5px 20px;
     cursor: pointer;
+    margin: 5px;
+    margin-left: 0;
   }
 
   .active {
