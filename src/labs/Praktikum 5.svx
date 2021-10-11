@@ -1,0 +1,13 @@
+# 1
+
+in f ist this das darüberlegende Objekt also global und ist definiert.
+
+Mit "use strict" wird verhindert, dass this auf diese Art verwendet werden kann da man sonst in das globale Objekt schreibt.
+
+---
+
+F ohne new => schreibt in das globale Objekt
+
+---
+
+mit Object.create({ f }) wird f auf dem Prototyp des Objekts gesetzt
