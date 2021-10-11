@@ -1,0 +1,86 @@
+# 2.
+
+```js
+const factorial = (n) => {
+  let returnValue = n;
+
+  while (n > 1n) {
+    returnValue *= --n;
+  }
+
+  return returnValue;
+};
+
+console.log(factorial(20));
+console.log(factorial(1));
+console.log(factorial(50n));
+```
+
+# 3.
+
+## a
+
+```js
+import { SCRIPTS } from "__base__/praktikum_4/scripts.js";
+
+const oldAndLiving = (SCRIPTS) =>
+  SCRIPTS.filter(({ year, living }) => year < 0 && living).map(
+    ({ name }) => name
+  );
+
+console.log(oldAndLiving(SCRIPTS));
+```
+
+## b
+
+```js
+import { SCRIPTS } from "__base__/praktikum_4/scripts.js";
+
+const numberOfCodes = ({ ranges }) =>
+  ranges.reduce((acc, [start, end]) => end - start + acc, 0);
+
+console.log(numberOfCodes(SCRIPTS[3]));
+```
+
+# Aufgabe 3: Schriftsysteme erkennen
+
+## a
+
+```js
+import { SCRIPTS } from "__base__/praktikum_4/scripts.js";
+
+const scriptOfSample = (symbol, SCRIPTS) => {
+  const symbolCode = symbol.codePointAt(0);
+  for (const { name, ranges } of SCRIPTS) {
+    for (const [start, end] of ranges) {
+      if (start <= symbolCode && symbolCode <= end) return name;
+    }
+  }
+  return "unknown";
+};
+
+console.log(scriptOfSample("A", SCRIPTS)); // "Latin"
+console.log(scriptOfSample("英", SCRIPTS)); // "Han"
+console.log(scriptOfSample("я", SCRIPTS)); // "Cyrillic"
+
+const countOccurrence = (obj, name) => {
+  if (!obj[name]) obj[name] = 0;
+
+  obj[name] += 1;
+  return obj;
+};
+
+const scriptsInString = (str, SCRIPTS) =>
+  str
+    .split("")
+    .map((char) => scriptOfSample(char, SCRIPTS))
+    .reduce(countOccurrence, {});
+
+console.log(scriptsInString('英国的狗说"JavaScript", "тяв"', SCRIPTS));
+```
+
+## c
+
+[".", ":", "/"] sind unknown
+
+Ein Buchstaben ist nicht aus dem lateinischen Alphabet => URL führt an anderen Ort als man denken würde.
