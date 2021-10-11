@@ -6,7 +6,8 @@
 
   let code = "";
 
-  afterUpdate(() => {
+  const addClickListener = () => {
+    console.log("updatedClick");
     [...document.querySelectorAll("pre.language-js")].forEach((element) => {
       element.addEventListener(
         "click",
@@ -19,7 +20,16 @@
         true
       );
     });
-  });
+  };
+
+  if (import.meta.hot) {
+    import.meta.hot.on("vite:beforeUpdate", () => {
+      setTimeout(addClickListener, 100);
+      setTimeout(addClickListener, 500);
+      setTimeout(addClickListener, 1000);
+    });
+  }
+  afterUpdate(addClickListener);
 </script>
 
 <div class="grid">

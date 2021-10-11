@@ -2,14 +2,32 @@
   import index from "./index.svx";
   import Wrapper from "./lib/Wrapper.svelte";
 
-  const imp = import.meta.glob("./labs/*.svx");
+  let imp = import.meta.glob("./labs/*.svx");
 
-  const getName = (path) => path.replace("./labs/", "").replace(".svx", "");
+  const getName = (path) =>
+    path.replace("./labs/", "").replace(".svx", "").replace(/ /g, "_");
+
+  imp = Object.fromEntries(
+    Object.entries(imp).map(([name, mod]) => [getName(name), mod])
+  );
 
   let selected;
-  let loading;
+  let loading = true;
   let selectedComponent = index;
 
+  const hash = window.location.hash.replace("#", "");
+
+  const load = imp[hash];
+
+  console.log(hash, load);
+  if (load) {
+    load().then((c) => {
+      selectedComponent = c.default;
+      selected = hash;
+      loading = false;
+    });
+    loading = false;
+  }
   $: if (imp[selected]) {
     loading = true;
     imp[selected]().then((mod) => {
@@ -33,6 +51,7 @@
       <p
         on:click={() => {
           selected = null;
+          window.location.hash = "";
         }}
         class:active={!selected}
       >
@@ -42,6 +61,7 @@
         <p
           on:click={() => {
             selected = name;
+            window.location.hash = name;
           }}
           class:active={selected === name}
         >

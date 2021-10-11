@@ -5,6 +5,7 @@
 
   let iframe: HTMLIFrameElement;
   function update(code: string) {
+    code = code.replace(/__base__/g, window.location.origin + window.location.pathname);
     iframe.contentWindow.postMessage(code, "*");
   }
   $: iframe && compiled && update(compiled);
